@@ -62,7 +62,8 @@
 }
 .authorization__button:hover {
   transition: background 0.5s;
-  background: var(--palegreen);
+  background: white;
+  color: black;
 }
 .authorization__error {
   color: white;
@@ -88,6 +89,19 @@
 }
 .home__header {
   margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
+}
+.home__button {
+  padding: 8px;
+  border-radius: 20px;
+  background: none;
+  border: 1px solid white;
+}
+.home__button:hover {
+  transition: background 0.5s;
+  background: white;
+  color: black;
 }
 .home__notifications {
   border: 1px solid black;

@@ -36,6 +36,18 @@
   padding: 20px 10px;
 }
 
+@mixin buttons {
+  padding: 8px;
+  border-radius: 20px;
+  background: none;
+  border: 1px solid white;
+  &:hover {
+    transition: background 0.5s;
+    background: white;
+    color: black;
+  }
+}
+
 .layout {
   background: var(--layoutBackground);
   width: 100vw;
@@ -61,14 +73,7 @@
     padding: 10px;
   }
   &__button {
-    padding: 8px;
-    border-radius: 20px;
-    background: none;
-    border: 1px solid white;
-  }
-  &__button:hover {
-    transition: background 0.5s;
-    background: var(--palegreen);
+    @include buttons;
   }
   &__error {
     color: white;
@@ -88,6 +93,11 @@
   overflow: hidden;
   &__header {
     margin: 15px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__button {
+    @include buttons;
   }
   &__notifications {
     border: 1px solid black;
