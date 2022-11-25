@@ -2,7 +2,7 @@
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
-  font-weight: 400;
+  font-weight: 500;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
@@ -13,7 +13,9 @@
   -webkit-text-size-adjust: 100%;
   --darkgreen: #ffa600;
   --palegreen: #00b383;
+  --mainBlockBckClr: #00b3835f;
   --layoutBackground: #00674b;
+  --grey: linear-gradient(#5555556c, #9696966c);
   --darkGreenGradient: linear-gradient(var(--darkgreen), var(--palegreen));
 }
 
@@ -24,19 +26,30 @@
 }
 
 .layout {
-  background: var(--layoutBackground);
+  background: var(--darkGreenGradient);
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
+}
+.layout__icon {
+  filter: blur(0.6px);
+  transform: scale(4);
+  position: relative;
+  left: 65vw;
+  top: 60vh;
 }
 
 .authorization {
-  background: var(--darkGreenGradient);
+  background: var(--mainBlockBckClr);
+  backdrop-filter: blur(15px);
   position: absolute;
+  z-index: 1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 30px;
   padding: 20px 10px;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.305);
   width: 300px;
   height: 150px;
 }
@@ -76,16 +89,18 @@
 }
 
 .home {
-  background: var(--darkGreenGradient);
+  background: var(--mainBlockBckClr);
+  backdrop-filter: blur(15px);
   position: absolute;
+  z-index: 1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 30px;
   padding: 20px 10px;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.305);
   width: 600px;
   height: 600px;
-  overflow: hidden;
 }
 .home__header {
   margin: 15px 0;
@@ -105,24 +120,46 @@
 }
 .home__notifications {
   border: 1px solid black;
-  height: 20%;
+  max-height: 120px;
   overflow-y: scroll;
 }
 .home .blockmenu {
   border: 1px solid black;
-  height: 25%;
+  height: 150px;
 }
 .home .blockmenu__itemblocks {
   border: 1px solid black;
   height: 70%;
   overflow-x: scroll;
   overflow-y: hidden;
+  display: flex;
+}
+
+.blockitem {
+  width: 90px;
+  height: 90px;
+  background: var(--grey);
+  margin: 3px;
+  border-radius: 20px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  text-align: center;
+  gap: 5px;
+}
+.blockitem__icon {
+  width: fit-content;
+  margin: 0 auto;
+}
+.blockitem__suggestion {
+  font-size: 9px;
 }
 
 .footer {
   width: 100%;
   background: rgba(0, 0, 0, 0.368627451);
-  position: absolute;
+  position: fixed;
   bottom: 0;
 }
 

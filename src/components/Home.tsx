@@ -1,10 +1,12 @@
 import { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
+import BlockItem from "./BlockItem";
 
 const Home = (): ReactElement => {
   const navigate = useNavigate();
+
   const handleLogOut = (): void => {
-    localStorage.clear();
+    localStorage.removeItem("clientIP");
     navigate("/login");
   };
 
@@ -17,9 +19,13 @@ const Home = (): ReactElement => {
         </button>
       </div>
       <div className="home__notifications">Bieżące komunikaty:</div>
+
       <div className="blockmenu">
         Sugestie działań:
-        <div className="blockmenu__itemblocks">{/* items */}</div>
+        <div className="blockmenu__itemblocks">
+          {/* items */}
+          <BlockItem />
+        </div>
       </div>
       <div className="blockmenu">
         Pomieszczenia:
