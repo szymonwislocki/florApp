@@ -20,6 +20,7 @@
   --layoutBackground: #00674b;
   --grey: linear-gradient(#5555556c, #9696966c);
   --darkGreenGradient: linear-gradient(var(--darkgreen), var(--palegreen));
+  --activeTile: rgba(255, 217, 0, 0.383);
 }
 
 * {
@@ -143,12 +144,38 @@
   font-size: 15px;
   text-align: center;
   gap: 5px;
+  position: relative;
+  transition: transform 0.2s;
+  &__roomname {
+    font-size: 13px;
+    text-transform: uppercase;
+  }
   &__icon {
     width: fit-content;
     margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   &__suggestion {
     font-size: 9px;
+  }
+  &__detailsrow {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__details {
+    font-size: 9px;
+  }
+  &__stateicon {
+    position: absolute;
+    bottom: 0;
+    transform: scale(0.6);
+  }
+  &:active {
+    transform: scale(1.1);
+    transition: transform 0.2s;
   }
 }
 

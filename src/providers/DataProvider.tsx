@@ -42,7 +42,7 @@ export const DataContext = createContext<ContextTypes>({} as ContextTypes);
 
 const DataProvider = ({ children }: Props): ReactElement => {
   const [devices, setDevices] = useState<Device[] | []>([]);
-  const [meta, setMeta] = useState<Meta[]>({});
+  const [meta, setMeta] = useState<Meta[]>([]);
   const [allRooms, setAllRooms] = useState<Room[]>([]);
 
   const fetchMeta = (): void => {

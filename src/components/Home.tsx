@@ -4,10 +4,6 @@ import { deviceTypes } from "../data/devicetypes";
 import { DataContext } from "../providers/DataProvider";
 import BlockItem from "./BlockItem";
 
-fetch("//192.168.0.200/api/devices/29/action/turnOff", { method: "POST", body: JSON.stringify({ turnOff: 0 }) })
-  .then((r) => r.json())
-  .then((r) => console.log(r));
-
 const Home = (): ReactElement => {
   const navigate = useNavigate();
   const { devices } = useContext(DataContext);
@@ -43,7 +39,7 @@ const Home = (): ReactElement => {
             .map((el) => {
               switch (el.type) {
                 case "com.fibaro.binarySwitch": {
-                  return <BlockItem key={el.id} id={el.id} value={el.properties.value} type={el.type} room={el.roomID} name={el.name} />;
+                  return <BlockItem key={el.id} id={el.id} value={el.properties.value} type={el.type} room={el.roomID} name={el.name} switchable />;
                 }
                 case "com.fibaro.FGT001": {
                   return (
@@ -56,7 +52,7 @@ const Home = (): ReactElement => {
                       name={el.name}
                       batteryLevel={el.properties.batteryLevel}
                       temperature={devices.find((e) => e.type === "com.fibaro.temperatureSensor" && e.roomID === el.roomID)?.properties.value}
-                      switchable
+                      givenTemperature={el.properties.value}
                     />
                   );
                 }

@@ -17,6 +17,7 @@
   --layoutBackground: #00674b;
   --grey: linear-gradient(#5555556c, #9696966c);
   --darkGreenGradient: linear-gradient(var(--darkgreen), var(--palegreen));
+  --activeTile: rgba(255, 217, 0, 0.383);
 }
 
 * {
@@ -149,13 +150,39 @@
   font-size: 15px;
   text-align: center;
   gap: 5px;
+  position: relative;
+  transition: transform 0.2s;
+}
+.blockitem__roomname {
+  font-size: 13px;
+  text-transform: uppercase;
 }
 .blockitem__icon {
   width: fit-content;
   margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .blockitem__suggestion {
   font-size: 9px;
+}
+.blockitem__detailsrow {
+  display: flex;
+  justify-content: space-between;
+}
+.blockitem__details {
+  font-size: 9px;
+}
+.blockitem__stateicon {
+  position: absolute;
+  bottom: 0;
+  transform: scale(0.6);
+}
+.blockitem:active {
+  transform: scale(1.1);
+  transition: transform 0.2s;
 }
 
 .footer {
