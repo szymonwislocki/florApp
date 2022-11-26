@@ -9,12 +9,13 @@ import { DataContext } from "./providers/DataProvider";
 
 function App() {
   const navigate = useNavigate();
-  const { fetchDevices, obtainNotifications } = useContext(DataContext);
+  const { fetchDevices, obtainNotifications, fetchMeta, fetchRooms } = useContext(DataContext);
   useEffect(() => {
     if (localStorage.getItem("clientIP")) {
       navigate("/home");
       fetchDevices();
-      obtainNotifications();
+      fetchMeta();
+      fetchRooms();
     } else {
       navigate("/login");
     }

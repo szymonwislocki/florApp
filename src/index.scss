@@ -130,8 +130,10 @@
 }
 
 .blockitem {
-  width: 90px;
-  height: 90px;
+  min-width: 90px;
+  min-height: 90px;
+  max-width: 90px;
+  max-height: 90px;
   background: var(--grey);
   margin: 3px;
   border-radius: 20px;

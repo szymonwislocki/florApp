@@ -5,29 +5,50 @@ interface Props {
   children: JSX.Element;
 }
 interface Device extends Object {
-  properties: Properties;
+  properties: DeviceProperties;
+  type: string;
+  id: number;
+  roomID: number;
+  name: string;
+}
+interface Room extends Object {
+  id: number;
+  name: string;
 }
 
-interface Properties extends Object {
+interface Meta extends Object {
+  sunsetHour: string;
+}
+
+interface DeviceProperties extends Object {
   batteryLevel: string;
+  value: string;
 }
 
 interface ContextTypes {
   devices: Device[];
   setDevices: (a: SetStateAction<Device[] | []>) => void;
   fetchDevices: () => void;
+  fetchRooms: () => void;
+  fetchMeta: () => void;
   obtainNotifications: () => void;
+  meta: Meta[];
+  setMeta: (a: SetStateAction<Meta[]>) => void;
+  allRooms: Room[];
+  setAllRooms: (a: Room[]) => void;
 }
 
 export const DataContext = createContext<ContextTypes>({} as ContextTypes);
 
 const DataProvider = ({ children }: Props): ReactElement => {
   const [devices, setDevices] = useState<Device[] | []>([]);
-  const [meta, setMeta] = useState<object>({});
+  const [meta, setMeta] = useState<Meta[]>({});
+  const [allRooms, setAllRooms] = useState<Room[]>([]);
 
   const fetchMeta = (): void => {
-    useAPI("settings/network").then((meta) => {
-      console.log(meta);
+    useAPI("settings/info").then((metadata) => {
+      console.log(metadata);
+      setMeta(metadata);
     });
   };
 
@@ -38,11 +59,20 @@ const DataProvider = ({ children }: Props): ReactElement => {
     });
   };
 
-  const obtainNotifications = async (): Promise<void> => {
-    console.log("oN called");
-    const batEquipped = devices.filter((e: Device) => Number(e.properties.batteryLevel) < 80);
+  const fetchRooms = (): void => {
+    useAPI("rooms").then((rooms) => {
+      console.log(rooms);
+      setAllRooms(rooms);
+    });
   };
-  return <DataContext.Provider value={{ devices, setDevices, fetchDevices, obtainNotifications }}>{children}</DataContext.Provider>;
+
+  const obtainNotifications = async (): Promise<void> => {
+    //Possible notification categories: low battery (ONLY? - have to check if anything more from API is possible to present it as worth-attention notification)
+    console.log("oN called");
+    const batEquipped: Device[] = devices?.filter((e: Device) => parseFloat(e.properties.batteryLevel) < 5);
+    console.log(batEquipped);
+  };
+  return <DataContext.Provider value={{ devices, setDevices, fetchDevices, obtainNotifications, meta, setMeta, allRooms, setAllRooms, fetchRooms, fetchMeta }}>{children}</DataContext.Provider>;
 };
 
 export default DataProvider;
