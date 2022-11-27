@@ -5,7 +5,7 @@ const Login = (): ReactElement => {
   const ERRORS = {
     RESPONSE_FAILED: "Błąd logowania – pod żądanym adresem IP nie znajduje się centrala.",
     FETCH_FAILED: "Nie można wysłać formularza. Spróbuj ponownie później.",
-    TOO_LONG_WAITING: "Logowanie trwa zbyt długo. Upewnij się, że adres IP jest poprawny.",
+    TOO_LONG_WAITING: "Jeśli logowanie trwa zbyt długo, sprawdź czy adres IP jest poprawny.",
   };
   const [error, setError] = useState<null | string>(null);
   const [loader, setLoader] = useState<boolean>(false);
@@ -25,10 +25,11 @@ const Login = (): ReactElement => {
         } else {
           setError(ERRORS.RESPONSE_FAILED);
         }
-        setLoader(false);
       })
       .catch(() => {
         setError(ERRORS.RESPONSE_FAILED);
+      })
+      .finally(() => {
         setLoader(false);
       });
   };

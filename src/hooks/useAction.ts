@@ -1,16 +1,4 @@
-interface Device {
-  actions: DeviceActions;
-  properties: DeviceProperties;
-}
-interface DeviceProperties {
-  value: string;
-}
-interface DeviceActions {
-  turnOff: number;
-  turnOn: number;
-}
-
-export const useAction = async (id: number, action: string, value: number, method: "GET" | "POST"): Promise<Device> => {
-  const response = await (method === "POST" ? fetch(`//${localStorage.getItem("clientIP")}/api/devices/${id}/action/${action}`, { method: method, body: JSON.stringify({ [action]: value }) }) : fetch(`//${localStorage.getItem("clientIP")}/api/devices/${id}`));
+export const useAction = async (id: number, action: string, value: number): Promise<Device> => {
+  const response = await fetch(`//${localStorage.getItem("clientIP")}/api/devices/${id}/action/${action}`, { method: "POST", body: JSON.stringify({ [action]: value }) });
   return await response.json();
 };

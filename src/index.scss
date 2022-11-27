@@ -173,6 +173,11 @@
     bottom: 0;
     transform: scale(0.6);
   }
+  &__roomtemperature {
+    position: absolute;
+    bottom: 0;
+    align-self: center;
+  }
   &:active {
     transform: scale(1.1);
     transition: transform 0.2s;
