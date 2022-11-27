@@ -11,13 +11,13 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  --darkgreen: #ffa600;
-  --palegreen: #00b383;
-  --mainBlockBckClr: #00b3835f;
+  --primary: #ffa600;
+  --secondary: #00b383;
+  --blockBackground: #00b3835f;
   --layoutBackground: #00674b;
-  --grey: linear-gradient(#5555556c, #9696966c);
-  --darkGreenGradient: linear-gradient(var(--darkgreen), var(--palegreen));
-  --activeTile: rgba(255, 217, 0, 0.383);
+  --tile: linear-gradient(#5555556c, #9696966c);
+  --gradient: linear-gradient(var(--primary), var(--secondary));
+  --tileWrapper: rgba(128, 128, 128, 0.364);
 }
 
 * {
@@ -27,7 +27,7 @@
 }
 
 .layout {
-  background: var(--darkGreenGradient);
+  background: var(--gradient);
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -41,7 +41,7 @@
 }
 
 .authorization {
-  background: var(--mainBlockBckClr);
+  background: var(--blockBackground);
   backdrop-filter: blur(15px);
   position: absolute;
   z-index: 1;
@@ -90,7 +90,7 @@
 }
 
 .home {
-  background: var(--mainBlockBckClr);
+  background: var(--blockBackground);
   backdrop-filter: blur(15px);
   position: absolute;
   z-index: 1;
@@ -120,16 +120,17 @@
   color: black;
 }
 .home__notifications {
-  border: 1px solid black;
   max-height: 120px;
   overflow-y: scroll;
 }
 .home .blockmenu {
-  border: 1px solid black;
+  background: var(--tileWrapper);
+  padding: 7px;
+  margin: 5px;
   height: 150px;
+  border-radius: 20px;
 }
 .home .blockmenu__itemblocks {
-  border: 1px solid black;
   height: 70%;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -141,7 +142,7 @@
   min-height: 90px;
   max-width: 90px;
   max-height: 90px;
-  background: var(--grey);
+  background: var(--tile);
   margin: 3px;
   border-radius: 20px;
   padding: 5px;

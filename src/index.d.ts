@@ -1,6 +1,3 @@
-interface Props {
-  children: JSX.Element;
-}
 interface Device {
   properties: DeviceProperties;
   type: string;
@@ -9,6 +6,7 @@ interface Device {
   name: string;
   actions: DeviceActions;
 }
+
 interface Room {
   id: number;
   name: string;

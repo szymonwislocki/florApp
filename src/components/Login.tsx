@@ -1,5 +1,5 @@
 import { FormEvent, ReactElement, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 const Login = (): ReactElement => {
   const ERRORS = {
@@ -9,18 +9,19 @@ const Login = (): ReactElement => {
   };
   const [error, setError] = useState<null | string>(null);
   const [loader, setLoader] = useState<boolean>(false);
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
 
   const handleLogin = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     setLoader(true);
     const formInput = e.currentTarget.elements[0] as HTMLInputElement;
     setTimeout(() => setError(ERRORS.TOO_LONG_WAITING), 5000);
+
+    //initial query to fibaro homecenter device
     fetch(`//${formInput.value}/api/settings/network`)
       .then((r) => {
         if (r.ok) {
           localStorage.setItem("clientIP", formInput.value as string);
-          console.log("logged");
           navigate("/home");
         } else {
           setError(ERRORS.RESPONSE_FAILED);

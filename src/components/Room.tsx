@@ -1,6 +1,5 @@
-import { ReactElement, useContext, useState } from "react";
-import { useAction } from "../hooks/useAction";
-import { useDevice } from "../hooks/useDevice";
+import { ReactElement, useContext } from "react";
+import { useTemperature } from "../hooks/useTemperature";
 import { DataContext } from "../providers/DataProvider";
 
 interface Props {
@@ -12,9 +11,9 @@ interface Props {
 
 const Room = ({ name, id, icon, temperatureSensor }: Props): ReactElement => {
   const { devices } = useContext(DataContext);
-  const suggestion = "";
 
-  const temperatureReference = devices.find((el) => el.roomID === id && el.id === temperatureSensor);
+  //get data of device which is handling a 'temperatureSensor' role in a proper room
+  const getTemperature = devices.find((el) => el.roomID === id && el.id === temperatureSensor)?.properties.value;
 
   const getIcon = () => {
     //if fetched obj does not have 'type' key, i assume it is a room
@@ -38,14 +37,13 @@ const Room = ({ name, id, icon, temperatureSensor }: Props): ReactElement => {
   };
 
   const iconUrl = getIcon();
-  console.log(temperatureSensor);
 
   return (
     <div className="blockitem">
       <p className="blockitem__roomname">{name}</p>
       {/* {true ? <p className="blockitem__suggestion">{suggestion}</p> : null} */}
       <img className="blockitem__icon" src={iconUrl} />
-      <div className="blockitem__roomtemperature">{temperatureReference ? <p className="blockitem__details">{temperatureReference.properties.value.split(".", 1) + "'C"}</p> : null}</div>
+      <div className="blockitem__roomtemperature">{getTemperature ? <p className="blockitem__details">{useTemperature(getTemperature)}</p> : null}</div>
     </div>
   );
 };
