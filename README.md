@@ -9,4 +9,4 @@ What else can I add to app is rendering notifiactions (e.g. low battery of therm
 In the near future I'm going to add demo mode with mock API for preview purposes.
 
 
-<img width="650" alt="Demo Picture of florApp" src="https://user-images.githubusercontent.com/111438136/204144190-46470fcb-faba-4a77-af71-4f601039f673.png">
+<img width="766" alt="demo" src="https://user-images.githubusercontent.com/111438136/204144613-8ce5c976-97e8-4fb3-a629-8f7d8ce4ef2d.png">
