@@ -120,6 +120,10 @@
   color: black;
 }
 .home__notifications {
+  background: var(--tileWrapper);
+  padding: 7px;
+  margin: 5px;
+  border-radius: 20px;
   max-height: 120px;
   overflow-y: scroll;
 }
@@ -127,8 +131,8 @@
   background: var(--tileWrapper);
   padding: 7px;
   margin: 5px;
-  height: 150px;
   border-radius: 20px;
+  height: 150px;
 }
 .home .blockmenu__itemblocks {
   height: 70%;

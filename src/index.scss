@@ -42,6 +42,13 @@
   box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.305);
 }
 
+@mixin section-background {
+  background: var(--tileWrapper);
+  padding: 7px;
+  margin: 5px;
+  border-radius: 20px;
+}
+
 @mixin buttons {
   padding: 8px;
   border-radius: 20px;
@@ -113,15 +120,13 @@
     @include buttons;
   }
   &__notifications {
+    @include section-background;
     max-height: 120px;
     overflow-y: scroll;
   }
   .blockmenu {
-    background: var(--tileWrapper);
-    padding: 7px;
-    margin: 5px;
+    @include section-background;
     height: 150px;
-    border-radius: 20px;
     &__itemblocks {
       height: 70%;
       overflow-x: scroll;
