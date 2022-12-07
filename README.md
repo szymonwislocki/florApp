@@ -10,4 +10,4 @@ In the near future I'm going to add demo mode with mock API for preview purposes
 
 
 
-<img width="650" alt="Zrzut ekranu 2022-11-27 o 16 45 24" src="https://user-images.githubusercontent.com/111438136/204638374-c2996fbf-058c-4f51-9d02-1a8e660aa3db.png">
+<img width="649" alt="app demo" src="https://user-images.githubusercontent.com/111438136/206309690-d5dda71f-46ab-4c1e-aa24-2727f7e635f8.png">
