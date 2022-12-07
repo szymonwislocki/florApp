@@ -1,30 +1,27 @@
 import { ReactElement, useContext } from "react";
-import { NavigateFunction, useNavigate } from "react-router-dom";
-import { deviceTypes } from "../data/devicetypes";
 import { DataContext } from "../providers/DataProvider";
-import Device from "./Device";
-import BlockItem from "./Device";
 import Devices from "./Devices";
 import Header from "./Header";
 import Notifications from "./Notifications";
-import Room from "./Room";
 import Rooms from "./Rooms";
-import Suggestions from "./Suggestions";
+import Weather from "./Weather";
 
 const Home = (): ReactElement => {
+  const { loaded } = useContext(DataContext);
 
-  const { allRooms } = useContext<ContextTypes>(DataContext);
-
-  console.log(allRooms);
   return (
-    <div className="home">
-      <Header />
-      <Notifications />
-      <Suggestions />
-      <Rooms />
-      <Devices />
-    </div>
+    <>
+      {loaded ? (
+        <div className="home">
+          <Header />
+          <Notifications />
+          <Weather />
+          {/* <Suggestions /> */}
+          <Rooms />
+          <Devices />
+        </div>
+      ) : null}
+    </>
   );
 };
-
 export default Home;

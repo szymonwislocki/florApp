@@ -42,7 +42,7 @@ const Room = ({ name, id, icon, temperatureSensor }: Props): ReactElement => {
     <div className="blockitem">
       <p className="blockitem__roomname">{name}</p>
       {/* {true ? <p className="blockitem__suggestion">{suggestion}</p> : null} */}
-      <img className="blockitem__icon" src={iconUrl} />
+      <img className="blockitem__icon" alt="room icon" src={iconUrl} />
       <div className="blockitem__roomtemperature">{getTemperature ? <p className="blockitem__details">{useTemperature(getTemperature)}</p> : null}</div>
     </div>
   );

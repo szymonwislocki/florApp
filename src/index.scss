@@ -13,15 +13,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-
-  --primary: #ffa600;
-  --secondary: #00b383;
-  --blockBackground: #00b3835f;
-  --layoutBackground: #00674b;
-  --tile: linear-gradient(#5555556c, #9696966c);
-  --gradient: linear-gradient(var(--primary), var(--secondary));
-  --tileWrapper: rgba(128, 128, 128, 0.364);
 }
+
+$primary: #ffa600;
+$secondary: #00b383;
+$blockBackground: #00b3835f;
+$layoutBackground: #00674b;
+$tile: linear-gradient(#5555556c, #9696966c);
+$gradient: linear-gradient($primary, $secondary);
+$tileWrapper: rgba(128, 128, 128, 0.364);
 
 * {
   box-sizing: border-box;
@@ -29,8 +29,8 @@
   padding: 0;
 }
 
-@mixin main-block {
-  background: var(--blockBackground);
+%main-block {
+  background: $blockBackground;
   backdrop-filter: blur(15px);
   position: absolute;
   z-index: 1;
@@ -42,14 +42,14 @@
   box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.305);
 }
 
-@mixin section-background {
-  background: var(--tileWrapper);
+%section-background {
+  background: $tileWrapper;
   padding: 7px;
   margin: 5px;
   border-radius: 20px;
 }
 
-@mixin buttons {
+%buttons {
   padding: 8px;
   border-radius: 20px;
   background: none;
@@ -61,8 +61,17 @@
   }
 }
 
+%hidden-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+  }
+}
+
 .layout {
-  background: var(--gradient);
+  background: $gradient;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -76,7 +85,7 @@
 }
 
 .authorization {
-  @include main-block;
+  @extend %main-block;
   width: 300px;
   height: 150px;
   &__form {
@@ -94,7 +103,7 @@
     padding: 10px;
   }
   &__button {
-    @include buttons;
+    @extend %buttons;
   }
   &__error {
     color: white;
@@ -108,30 +117,58 @@
 }
 
 .home {
-  @include main-block;
-  width: 600px;
-  height: 600px;
+  @extend %main-block;
+  width: min(600px, 100vw);
+  height: min(600px, 100vh);
+  overflow-y: scroll;
+  animation: loaded 0.5s;
+  @extend %hidden-scrollbar;
   &__header {
     margin: 15px 0;
     display: flex;
     justify-content: space-between;
   }
   &__button {
-    @include buttons;
+    @extend %buttons;
   }
   &__notifications {
-    @include section-background;
+    @extend %section-background;
     max-height: 120px;
     overflow-y: scroll;
   }
   .blockmenu {
-    @include section-background;
+    @extend %section-background;
     height: 150px;
+    @extend %hidden-scrollbar;
+    &--weather {
+      @extend %section-background;
+      height: fit-content;
+    }
     &__itemblocks {
       height: 70%;
       overflow-x: scroll;
       overflow-y: hidden;
       display: flex;
+      @extend %hidden-scrollbar;
+      &--weather {
+        width: 100%;
+        display: flex;
+        gap: 5px;
+      }
+    }
+    &__weatherinfo {
+      width: 33%;
+      height: 90px;
+      background: $tile;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      .weatherinfo__icon {
+        width: fit-content;
+        align-self: center;
+      }
     }
   }
 }
@@ -141,7 +178,7 @@
   min-height: 90px;
   max-width: 90px;
   max-height: 90px;
-  background: var(--tile);
+  background: $tile;
   margin: 3px;
   border-radius: 20px;
   padding: 5px;
@@ -195,4 +232,22 @@
   background: #0000005e;
   position: fixed;
   bottom: 0;
+}
+@keyframes loaded {
+  0% {
+    opacity: 0;
+    scale: 0.8;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+@media screen and (max-width: 375px) {
+  .home {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    animation: none;
+  }
 }

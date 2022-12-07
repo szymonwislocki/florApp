@@ -15,7 +15,7 @@ const Login = (): ReactElement => {
     e.preventDefault();
     setLoader(true);
     const formInput = e.currentTarget.elements[0] as HTMLInputElement;
-    setTimeout(() => setError(ERRORS.TOO_LONG_WAITING), 5000);
+    const tooLong = setTimeout(() => setError(ERRORS.TOO_LONG_WAITING), 5000);
 
     //initial query to fibaro homecenter device
     fetch(`//${formInput.value}/api/settings/network`)
@@ -32,6 +32,7 @@ const Login = (): ReactElement => {
       })
       .finally(() => {
         setLoader(false);
+        clearTimeout(tooLong);
       });
   };
 

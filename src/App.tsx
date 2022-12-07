@@ -9,7 +9,7 @@ import { DataContext } from "./providers/DataProvider";
 
 function App() {
   const navigate = useNavigate();
-  const { fetchData } = useContext(DataContext);
+  const { fetchData, loaded } = useContext(DataContext);
   useEffect(() => {
     if (localStorage.getItem("clientIP")) {
       fetchData();

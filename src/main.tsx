@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import Footer from "./components/Footer";
 import Layout from "./components/Layout";
-import "./index.css";
+import "./index.scss";
 import DataProvider, { DataContext } from "./providers/DataProvider";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

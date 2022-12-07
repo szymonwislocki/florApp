@@ -53,10 +53,10 @@ const Device = ({ name, type, id, batteryLevel, givenTemperature, temperature, v
       {givenTemperature ? (
         <p className="blockitem__details">
           {useTemperature(givenTemperature)}
-          <img className="blockitem__icon" src={iconUrl} />
+          <img className="blockitem__icon" src={iconUrl} alt="device icon" />
         </p>
       ) : (
-        <img className="blockitem__icon" src={iconUrl} />
+        <img className="blockitem__icon" src={iconUrl} alt="device icon" />
       )}
       {/* {true ? <p className="blockitem__suggestion">{suggestion}</p> : null} */}
       <div className="blockitem__detailsrow">
