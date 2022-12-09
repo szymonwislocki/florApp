@@ -9,6 +9,6 @@ What else can I add to app is rendering notifiactions (e.g. low battery of therm
 In the near future I'm going to add demo mode with mock API for preview purposes.
 
 
+<img width="725" alt="app demo1" src="https://user-images.githubusercontent.com/111438136/206804392-b517918e-6244-44c2-9362-93c707a97e54.png">
 
-
-<img width="652" alt="app demo" src="https://user-images.githubusercontent.com/111438136/206309862-e5ac32da-ed07-4ce8-bbd1-ceb5cf1da355.png">
+<img width="720" alt="app demo2" src="https://user-images.githubusercontent.com/111438136/206804393-cc4126ca-e631-444f-b31c-8d042fdbe02e.png">
