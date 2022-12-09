@@ -18,6 +18,7 @@
 $primary: #ffa600;
 $secondary: #00b383;
 $blockBackground: #00b3835f;
+$detailsBackground: #0c7f60b2;
 $layoutBackground: #00674b;
 $tile: linear-gradient(#5555556c, #9696966c);
 $gradient: linear-gradient($primary, $secondary);
@@ -70,6 +71,11 @@ $tileWrapper: rgba(128, 128, 128, 0.364);
   }
 }
 
+%place-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
 .layout {
   background: $gradient;
   width: 100vw;
@@ -120,7 +126,7 @@ $tileWrapper: rgba(128, 128, 128, 0.364);
   @extend %main-block;
   width: min(600px, 100vw);
   height: min(600px, 100vh);
-  overflow-y: scroll;
+  overflow: scroll;
   animation: loaded 0.5s;
   @extend %hidden-scrollbar;
   &__header {
@@ -138,7 +144,7 @@ $tileWrapper: rgba(128, 128, 128, 0.364);
   }
   .blockmenu {
     @extend %section-background;
-    height: 150px;
+    height: 145px;
     @extend %hidden-scrollbar;
     &--weather {
       @extend %section-background;
@@ -165,6 +171,8 @@ $tileWrapper: rgba(128, 128, 128, 0.364);
       flex-direction: column;
       justify-content: space-between;
       text-align: center;
+      text-transform: uppercase;
+      font-size: 12px;
       .weatherinfo__icon {
         width: fit-content;
         align-self: center;
@@ -226,7 +234,54 @@ $tileWrapper: rgba(128, 128, 128, 0.364);
     transition: transform 0.2s;
   }
 }
-
+.details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  display: grid;
+  place-items: center;
+  &__window {
+    width: 95%;
+    max-height: 80%;
+    overflow: scroll;
+    padding: 20px;
+    background: $detailsBackground;
+    border-radius: 30px;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.305);
+  }
+  .details {
+    &__name {
+      @extend %section-background;
+      @extend %place-space-between;
+      text-align: center;
+    }
+    &__datablock {
+      @extend %section-background;
+      padding: 10px;
+      &--devices {
+        display: flex;
+      }
+    }
+    &__data {
+      &--temperature {
+        @extend %section-background;
+        @extend %place-space-between;
+      }
+      @extend %place-space-between;
+      padding: 5px 0;
+    }
+    &__button {
+      @extend %buttons;
+    }
+  }
+}
 .footer {
   width: 100%;
   background: #0000005e;
