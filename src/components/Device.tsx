@@ -9,7 +9,7 @@ interface Props {
   switchable?: boolean;
 }
 
-const Device : FC<Props> = ({ id, switchable })  => {
+const Device: FC<Props> = ({ id, switchable }) => {
   const { devices } = useContext(DataContext);
   const deviceData = devices.find((el) => el.id === id) as Device;
   const {
@@ -51,7 +51,7 @@ const Device : FC<Props> = ({ id, switchable })  => {
       <p className="blockitem__roomname">{name}</p>
       {targetLevel ? (
         <p className="blockitem__details">
-          {useTemperature(targetLevel)}
+          {useTemperature(targetLevel, 0)}
           <img className="blockitem__icon" src={getIcon()} alt="device icon" />
         </p>
       ) : (
@@ -59,7 +59,7 @@ const Device : FC<Props> = ({ id, switchable })  => {
       )}
       {/* {true ? <p className="blockitem__suggestion">{suggestion}</p> : null} */}
       <div className="blockitem__detailsrow">
-        {temp && !switchable ? <p className="blockitem__details">{useTemperature(temp)}</p> : null}
+        {temp && !switchable ? <p className="blockitem__details">{useTemperature(temp, 1)}</p> : null}
         {batteryLevel ? <p className="blockitem__details">{batteryLevel + "%"}</p> : null}
         {switchable ? currentValue === "true" ? <div className="blockitem__stateicon">🟡</div> : <div className="blockitem__stateicon">⚪️</div> : null}
       </div>

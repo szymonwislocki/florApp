@@ -1,9 +1,10 @@
 import { FC, useContext } from "react";
+import { useTemperature } from "../hooks/useTemperature";
 import { DataContext } from "../providers/DataProvider";
 
 const Weather: FC = () => {
   const {
-    weather: { Humidity, Temperature, TemperatureUnit, Wind, WindUnit },
+    weather: { Humidity, Temperature, Wind, WindUnit },
   } = useContext(DataContext);
   return (
     <div className="blockmenu--weather">
@@ -17,7 +18,7 @@ const Weather: FC = () => {
         <div className="blockmenu__weatherinfo">
           <p>Temperatura</p>
           <img src="../../media/iconmonstr-weather-6-24.png" className="weatherinfo__icon" alt="temperature" />
-          <p>{Temperature.toFixed(1) + "'" + TemperatureUnit}</p>
+          <p>{useTemperature(Temperature, 1)}</p>
         </div>
         <div className="blockmenu__weatherinfo">
           <p>Wiatr</p>

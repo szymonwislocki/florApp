@@ -9,7 +9,7 @@ interface Props {
 }
 
 const DataProvider: FC<Props> = ({ children }) => {
-  const [devices, setDevices] = useState<Device[] | []>([]);
+  const [devices, setDevices] = useState<Device[]>([] as Device[]);
   const [meta, setMeta] = useState<Meta[]>([]);
   const [allRooms, setAllRooms] = useState<Room[]>([]);
   const [weather, setWeather] = useState<Weather>({} as Weather);

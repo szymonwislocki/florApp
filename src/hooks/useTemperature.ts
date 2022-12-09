@@ -1,3 +1,3 @@
-export const useTemperature = (temperature : string) : string => {
-    return Number(temperature).toFixed(0) + "'C";
-}
+export const useTemperature = (temperature: string | number, precision: number): string => {
+  return Number(temperature).toFixed(precision) + `°C`;
+};
