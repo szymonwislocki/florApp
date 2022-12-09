@@ -1,7 +1,7 @@
-import { ReactElement, useContext } from "react";
+import { FC, useContext } from "react";
 import { DataContext } from "../providers/DataProvider";
 
-const Notifications = (): ReactElement => {
+const Notifications : FC = ()   => {
   const { alerts } = useContext(DataContext);
   return (
     <div className="home__notifications">

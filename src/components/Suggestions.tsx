@@ -1,6 +1,5 @@
-import { ReactElement } from "react";
 
-const Suggestions = (): ReactElement => {
+const Suggestions  : React.FC = ()  => {
   return (
     <div className="blockmenu">
       Sugestie działań:

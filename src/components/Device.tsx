@@ -1,23 +1,29 @@
-import { ReactElement, useContext, useEffect, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { useAction } from "../hooks/useAction";
 import { useDevice } from "../hooks/useDevice";
 import { useTemperature } from "../hooks/useTemperature";
+import { DataContext } from "../providers/DataProvider";
 
 interface Props {
   id: number;
-  name: string;
-  batteryLevel?: string;
-  temperature?: string | undefined;
   switchable?: boolean;
-  type: string;
-  value: string;
-  givenTemperature?: string;
-  room?: number;
 }
 
-const Device = ({ name, type, id, batteryLevel, givenTemperature, temperature, value, switchable }: Props): ReactElement => {
+const Device : FC<Props> = ({ id, switchable })  => {
+  const { devices } = useContext(DataContext);
+  const deviceData = devices.find((el) => el.id === id) as Device;
+  const {
+    name,
+    type,
+    roomID,
+    properties: { batteryLevel, value, targetLevel },
+  } = deviceData;
+
   const [currentValue, setCurrentValue] = useState<string>(value);
   // const suggestion = "";
+
+  //get data of a temperature sensor from the same room as heat controller is
+  const temp = devices.find((el: Device) => el.type === "com.fibaro.temperatureSensor" && el.roomID === roomID)?.properties.value;
 
   const getIcon = () => {
     switch (type) {
@@ -43,9 +49,9 @@ const Device = ({ name, type, id, batteryLevel, givenTemperature, temperature, v
   return (
     <div onClick={handleClick} className="blockitem">
       <p className="blockitem__roomname">{name}</p>
-      {givenTemperature ? (
+      {targetLevel ? (
         <p className="blockitem__details">
-          {useTemperature(givenTemperature)}
+          {useTemperature(targetLevel)}
           <img className="blockitem__icon" src={getIcon()} alt="device icon" />
         </p>
       ) : (
@@ -53,7 +59,7 @@ const Device = ({ name, type, id, batteryLevel, givenTemperature, temperature, v
       )}
       {/* {true ? <p className="blockitem__suggestion">{suggestion}</p> : null} */}
       <div className="blockitem__detailsrow">
-        {temperature ? <p className="blockitem__details">{useTemperature(temperature)}</p> : null}
+        {temp && !switchable ? <p className="blockitem__details">{useTemperature(temp)}</p> : null}
         {batteryLevel ? <p className="blockitem__details">{batteryLevel + "%"}</p> : null}
         {switchable ? currentValue === "true" ? <div className="blockitem__stateicon">🟡</div> : <div className="blockitem__stateicon">⚪️</div> : null}
       </div>

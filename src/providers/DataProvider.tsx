@@ -1,4 +1,4 @@
-import { createContext, ReactElement, SetStateAction, useState } from "react";
+import { createContext, FC, useState } from "react";
 import { useAPI } from "../hooks/useAPI";
 import { useWeather } from "../hooks/useWeather";
 
@@ -8,11 +8,11 @@ interface Props {
   children: JSX.Element;
 }
 
-const DataProvider = ({ children }: Props): ReactElement => {
+const DataProvider: FC<Props> = ({ children }) => {
   const [devices, setDevices] = useState<Device[] | []>([]);
   const [meta, setMeta] = useState<Meta[]>([]);
   const [allRooms, setAllRooms] = useState<Room[]>([]);
-  const [weather, setWeather] = useState<Weather | null>(null);
+  const [weather, setWeather] = useState<Weather>({} as Weather);
   const [alerts, setAlerts] = useState<FibaroNotification[] | []>([]);
   const [loaded, setLoaded] = useState<boolean>(false);
 

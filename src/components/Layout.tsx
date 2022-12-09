@@ -1,8 +1,9 @@
-import { ReactElement, ReactNode } from "react";
+import { FC } from "react";
+
 interface Props {
   children: JSX.Element;
 }
-const Layout = ({ children }: Props): ReactElement => {
+const Layout : FC<Props> = ({ children }: Props) => {
   return (
     <div className="layout">
       {children}

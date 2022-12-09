@@ -1,13 +1,10 @@
-import { ReactElement, useContext } from "react";
+import { FC, useContext } from "react";
 import { deviceTypes } from "../data/devicetypes";
 import { DataContext } from "../providers/DataProvider";
 import Device from "./Device";
 
-const Devices = (): ReactElement => {
+const Devices : FC = () => {
   const { devices } = useContext<ContextTypes>(DataContext);
-
-  //get data of a temperature sensor from the same room as heat controller is
-  const sensorRef = devices.find((el: Device) => el.type === "com.fibaro.temperatureSensor" && el.roomID === el.roomID);
 
   return (
     <div className="blockmenu">
@@ -18,10 +15,10 @@ const Devices = (): ReactElement => {
           .map((el: Device) => {
             switch (el.type) {
               case "com.fibaro.binarySwitch": {
-                return <Device key={el.id} id={el.id} type={el.type} value={el.properties.value} room={el.roomID} name={el.name} switchable />;
+                return <Device key={el.id} id={el.id} switchable />;
               }
               case "com.fibaro.FGT001": {
-                return <Device key={el.id} id={el.id} value={el.properties.value} type={el.type} room={el.roomID} name={el.name} batteryLevel={el.properties.batteryLevel} temperature={sensorRef?.properties.value} givenTemperature={el.properties.value} />;
+                return <Device key={el.id} id={el.id}/>;
               }
             }
           })}

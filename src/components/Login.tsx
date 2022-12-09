@@ -1,7 +1,7 @@
-import { FormEvent, ReactElement, useState } from "react";
+import { FC,FormEvent, useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
-const Login = (): ReactElement => {
+const Login : FC = ()   => {
   const ERRORS = {
     RESPONSE_FAILED: "Błąd logowania – pod żądanym adresem IP nie znajduje się centrala.",
     FETCH_FAILED: "Nie można wysłać formularza. Spróbuj ponownie później.",
@@ -14,14 +14,13 @@ const Login = (): ReactElement => {
   const handleLogin = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     setLoader(true);
-    const formInput = e.currentTarget.elements[0] as HTMLInputElement;
     const tooLong = setTimeout(() => setError(ERRORS.TOO_LONG_WAITING), 5000);
-
+    const inputValue = (e.currentTarget.elements[0] as HTMLInputElement).value;
     //initial query to fibaro homecenter device
-    fetch(`//${formInput.value}/api/settings/network`)
+    fetch(`//${inputValue}/api/settings/network`)
       .then((r) => {
         if (r.ok) {
-          localStorage.setItem("clientIP", formInput.value as string);
+          localStorage.setItem("clientIP", inputValue as string);
           navigate("/home");
         } else {
           setError(ERRORS.RESPONSE_FAILED);

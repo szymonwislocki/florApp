@@ -1,7 +1,6 @@
-import { ReactElement } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
-const Header = (): ReactElement => {
+const Header : React.FC = ()  => {
   const navigate: NavigateFunction = useNavigate();
 
   const handleLogOut = (): void => {

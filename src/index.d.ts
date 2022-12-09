@@ -12,6 +12,7 @@ interface Room {
   name: string;
   defaultSensors: SensorList;
   icon: string;
+  defaultThermostat: number;
 }
 
 interface SensorList {
@@ -25,6 +26,11 @@ interface Meta {
 interface DeviceProperties {
   batteryLevel: string;
   value: string;
+  temperature: string;
+  givenTemperature: string;
+  nextTargetLevel: string;
+  batteryLevel: string;
+  targetLevel: string;
 }
 
 interface ContextTypes {
@@ -35,7 +41,7 @@ interface ContextTypes {
   setMeta: (a: SetStateAction<Meta[]>) => void;
   allRooms: Room[];
   setAllRooms: (a: Room[]) => void;
-  weather: Weather | null;
+  weather: Weather;
   alerts: FibaroNotification[];
   setAlerts: (a: FibaroNotification[]) => void;
   loaded: boolean;

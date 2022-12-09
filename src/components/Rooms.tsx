@@ -1,8 +1,8 @@
-import { ReactElement, useContext } from "react";
+import {  FC, useContext } from "react";
 import { DataContext } from "../providers/DataProvider";
 import Room from "./Room";
 
-const Rooms = (): ReactElement => {
+const Rooms : FC = ()   => {
   const { allRooms } = useContext<ContextTypes>(DataContext);
 
   return (
@@ -10,7 +10,7 @@ const Rooms = (): ReactElement => {
       Pomieszczenia:
       <div className="blockmenu__itemblocks">
         {allRooms
-          //'User1001' stands for technical rooms such as weather bot. I do not want it in that moment
+          //'User1001' stands for technical rooms such as weather bot. I do not want it at any place
           .filter((el: Room) => el.icon !== "User1001")
           .map((el: Room) => (
             <Room key={el.id} id={el.id} name={el.name} icon={el.icon} temperatureSensor={el.defaultSensors.temperature} />
