@@ -1,9 +1,7 @@
-import { HTMLAttributes, ReactElement, useContext, useState } from "react";
-import { deviceTypes } from "../data/devicetypes";
+import { ReactElement, useContext, useEffect, useState } from "react";
 import { useAction } from "../hooks/useAction";
 import { useDevice } from "../hooks/useDevice";
 import { useTemperature } from "../hooks/useTemperature";
-import { DataContext } from "../providers/DataProvider";
 
 interface Props {
   id: number;
@@ -18,8 +16,7 @@ interface Props {
 }
 
 const Device = ({ name, type, id, batteryLevel, givenTemperature, temperature, value, switchable }: Props): ReactElement => {
-  const { devices } = useContext(DataContext);
-  const [currentValue, setCurrentValue] = useState(value);
+  const [currentValue, setCurrentValue] = useState<string>(value);
   // const suggestion = "";
 
   const getIcon = () => {
@@ -33,17 +30,13 @@ const Device = ({ name, type, id, batteryLevel, givenTemperature, temperature, v
     }
   };
 
-  const iconUrl = getIcon();
-
   const handleClick = async () => {
     //switchable block
     if (switchable) {
-      const deviceReference = await useDevice(id);
-      const actionType = deviceReference.properties.value === "true" ? "turnOff" : "turnOn";
-      //response from "GET" query above does not return full data about device, so I have to again fetch it below >:(
+      const actionType = currentValue === "true" ? "turnOff" : "turnOn";
       await useAction(id, actionType, 1);
-      setCurrentValue((await useDevice(id)).properties.value);
-      console.log(typeof currentValue, currentValue);
+      //response from "GET" query above does not return full data about device, so I have to again fetch it below + wait manually to avoid latency in communication between homecenter and device
+      setTimeout(() => useDevice(id).then((r) => setCurrentValue(r.properties.value)), 100);
     }
   };
 
@@ -53,10 +46,10 @@ const Device = ({ name, type, id, batteryLevel, givenTemperature, temperature, v
       {givenTemperature ? (
         <p className="blockitem__details">
           {useTemperature(givenTemperature)}
-          <img className="blockitem__icon" src={iconUrl} alt="device icon" />
+          <img className="blockitem__icon" src={getIcon()} alt="device icon" />
         </p>
       ) : (
-        <img className="blockitem__icon" src={iconUrl} alt="device icon" />
+        <img className="blockitem__icon" src={getIcon()} alt="device icon" />
       )}
       {/* {true ? <p className="blockitem__suggestion">{suggestion}</p> : null} */}
       <div className="blockitem__detailsrow">
