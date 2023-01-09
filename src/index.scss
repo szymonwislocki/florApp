@@ -39,7 +39,7 @@ $tileWrapper: rgba(128, 128, 128, 0.364);
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 30px;
-  padding: 20px 10px;
+  padding: 20px 15px;
   box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.305);
 }
 
@@ -125,7 +125,7 @@ $tileWrapper: rgba(128, 128, 128, 0.364);
 .home {
   @extend %main-block;
   width: min(600px, 100vw);
-  height: min(600px, 100vh);
+  height: min(550px, 100vh);
   overflow: scroll;
   animation: loaded 0.5s;
   @extend %hidden-scrollbar;
@@ -145,13 +145,15 @@ $tileWrapper: rgba(128, 128, 128, 0.364);
   .blockmenu {
     @extend %section-background;
     height: 145px;
+    padding: 10px 15px;
     @extend %hidden-scrollbar;
     &--weather {
       @extend %section-background;
       height: fit-content;
+      padding: 10px 15px;
     }
     &__itemblocks {
-      height: 70%;
+      height: 75%;
       overflow-x: scroll;
       overflow-y: hidden;
       display: flex;
@@ -160,6 +162,7 @@ $tileWrapper: rgba(128, 128, 128, 0.364);
         width: 100%;
         display: flex;
         gap: 5px;
+        margin-top: 5px;
       }
     }
     &__weatherinfo {
