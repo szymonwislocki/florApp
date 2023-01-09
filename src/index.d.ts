@@ -37,6 +37,7 @@ interface ContextTypes {
   devices: Device[];
   setDevices: (a: SetStateAction<Device[] | []>) => void;
   fetchData: () => void;
+  fetchDevices: () => void;
   meta: Meta[];
   setMeta: (a: SetStateAction<Meta[]>) => void;
   allRooms: Room[];

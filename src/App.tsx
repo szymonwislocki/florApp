@@ -1,19 +1,16 @@
 import { useContext, useEffect } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-import Footer from "./components/Footer";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
-import Layout from "./components/Layout";
 import Login from "./components/Login";
-import { useAPI } from "./hooks/useAPI";
 import { DataContext } from "./providers/DataProvider";
 
 function App() {
   const navigate = useNavigate();
-  const { fetchData, loaded } = useContext(DataContext);
+  const { fetchData } = useContext(DataContext);
   useEffect(() => {
     if (localStorage.getItem("clientIP")) {
-      fetchData();
       navigate("/home");
+      fetchData();
     } else {
       navigate("/login");
     }

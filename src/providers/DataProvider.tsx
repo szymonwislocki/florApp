@@ -25,8 +25,10 @@ const DataProvider: FC<Props> = ({ children }) => {
     setAlerts(await useAPI("panels/notifications"));
     setLoaded(true);
   };
-
-  return <DataContext.Provider value={{ devices, setDevices, meta, setMeta, allRooms, setAllRooms, fetchData, weather, alerts, setAlerts, loaded }}>{children}</DataContext.Provider>;
+  const fetchDevices = async (): Promise<void> => {
+    setDevices(await useAPI("devices"));
+  };
+  return <DataContext.Provider value={{ devices, setDevices, meta, setMeta, allRooms, setAllRooms, fetchData,fetchDevices, weather, alerts, setAlerts, loaded }}>{children}</DataContext.Provider>;
 };
 
 export default DataProvider;

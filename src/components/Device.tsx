@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Device: FC<Props> = ({ id, switchable }) => {
-  const { devices } = useContext(DataContext);
+  const { devices, fetchDevices } = useContext(DataContext);
   const deviceData = devices.find((el) => el.id === id) as Device;
   const {
     name,
@@ -42,7 +42,14 @@ const Device: FC<Props> = ({ id, switchable }) => {
       const actionType = currentValue === "true" ? "turnOff" : "turnOn";
       await useAction(id, actionType, 1);
       //response from "GET" query above does not return full data about device, so I have to again fetch it below + wait manually to avoid latency in communication between homecenter and device
-      setTimeout(() => useDevice(id).then((r) => setCurrentValue(r.properties.value)), 100);
+      setTimeout(
+        () =>
+          useDevice(id).then((r) => {
+            setCurrentValue(r.properties.value);
+            fetchDevices();
+          }),
+        100
+      );
     }
   };
 
