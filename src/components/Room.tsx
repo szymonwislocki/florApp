@@ -44,7 +44,7 @@ const Room: FC<Props> = ({ name, id, icon, temperatureSensor }) => {
         <p className="blockitem__roomname">{name}</p>
         {/* {true ? <p className="blockitem__suggestion">{suggestion}</p> : null} */}
         <img className="blockitem__icon" alt="room icon" src={getIcon()} />
-        <div className="blockitem__roomtemperature">{temp ? <p className="blockitem__details">{useTemperature(temp)}</p> : null}</div>
+        <div className="blockitem__roomtemperature">{temp ? <p className="blockitem__details">{useTemperature(temp, 0)}</p> : null}</div>
       </div>
       {details ? <RoomDetails id={id} setDetails={setDetails} /> : null}
     </>
